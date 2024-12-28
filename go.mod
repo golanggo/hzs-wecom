@@ -1,10 +1,11 @@
-module github.com/go-laoji/wecom-go-sdk/v2
+module github.com/golanggo/hzs-wecom
 
-go 1.20
+go 1.21
 
 require (
 	github.com/dgraph-io/badger/v3 v3.2103.5
 	github.com/gin-gonic/gin v1.9.1
+	github.com/go-laoji/wecom-go-sdk/v2 v2.1.1
 	github.com/go-laoji/wxbizmsgcrypt v1.0.0
 	github.com/go-playground/validator/v10 v10.14.1
 	github.com/go-resty/resty/v2 v2.7.0
