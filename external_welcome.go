@@ -1,7 +1,7 @@
 package wework
 
 import (
-	"github.com/go-laoji/wecom-go-sdk/v2/internal"
+	"github.com/golanggo/hzs-wecom/internal"
 )
 
 // SendWelcomeMsg 发送新客户欢迎语

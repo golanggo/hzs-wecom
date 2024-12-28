@@ -6,8 +6,8 @@ import (
 	"os"
 
 	badger "github.com/dgraph-io/badger/v3"
-	"github.com/go-laoji/wecom-go-sdk/v2/internal"
 	"github.com/go-resty/resty/v2"
+	"github.com/golanggo/hzs-wecom/internal"
 	"go.uber.org/zap"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"

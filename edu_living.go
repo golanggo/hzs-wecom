@@ -1,7 +1,7 @@
 package wework
 
 import (
-	"github.com/go-laoji/wecom-go-sdk/v2/internal"
+	"github.com/golanggo/hzs-wecom/internal"
 )
 
 type GetUserAllLivingIdRequest struct {
@@ -154,15 +154,15 @@ func (ww *weWork) DeleteReplayData(corpId uint, livingId string) (resp internal.
 }
 
 type LivingCreateRequest struct {
-	AnchorUserID   string `json:"anchor_userid" validate:"required"`
-	Theme                string `form:"theme" json:"theme"`
-	LivingStart          uint32 `form:"living_start" json:"living_start"`
-	LivingDuration       string `form:"living_duration" json:"living_duration"`
-	Type                 int    `form:"type" json:"type"`
-	Description          string `form:"description" json:"description"`
-	AgentID              int    `form:"agent_id" json:"agent_id"`
-	RemindTime           uint32 `form:"remind_time" json:"remind_time"`
-	ActivityCoverMediaID string `form:"activity_cover_media_id" json:"activity_cover_media_id"`
+	AnchorUserID         string             `json:"anchor_userid" validate:"required"`
+	Theme                string             `form:"theme" json:"theme"`
+	LivingStart          uint32             `form:"living_start" json:"living_start"`
+	LivingDuration       string             `form:"living_duration" json:"living_duration"`
+	Type                 int                `form:"type" json:"type"`
+	Description          string             `form:"description" json:"description"`
+	AgentID              int                `form:"agent_id" json:"agent_id"`
+	RemindTime           uint32             `form:"remind_time" json:"remind_time"`
+	ActivityCoverMediaID string             `form:"activity_cover_media_id" json:"activity_cover_media_id"`
 	ActivityDetail       ActivityDetailInfo `form:"activity_detail" json:"activity_detail"`
 }
 type ActivityDetailInfo struct {

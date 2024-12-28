@@ -2,7 +2,7 @@ package wework
 
 import (
 	"fmt"
-	"github.com/go-laoji/wecom-go-sdk/v2/internal"
+	"github.com/golanggo/hzs-wecom/internal"
 )
 
 type AgentGetResponse struct {

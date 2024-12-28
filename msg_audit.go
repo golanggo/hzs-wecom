@@ -2,7 +2,7 @@ package wework
 
 import (
 	"errors"
-	"github.com/go-laoji/wecom-go-sdk/v2/internal"
+	"github.com/golanggo/hzs-wecom/internal"
 )
 
 type GetPermitUserListResponse struct {

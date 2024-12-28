@@ -4,7 +4,7 @@ import (
 	"crypto/sha1"
 	"fmt"
 	"github.com/dgraph-io/badger/v3"
-	"github.com/go-laoji/wecom-go-sdk/v2/internal"
+	"github.com/golanggo/hzs-wecom/internal"
 	"io"
 	"math/rand"
 	"sort"

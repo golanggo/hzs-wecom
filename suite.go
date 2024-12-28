@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/dgraph-io/badger/v3"
-	"github.com/go-laoji/wecom-go-sdk/v2/internal"
-	"github.com/go-laoji/wecom-go-sdk/v2/pkg/svr/models"
+	"github.com/golanggo/hzs-wecom/internal"
+	"github.com/golanggo/hzs-wecom/pkg/svr/models"
 )
 
 // UpdateSuiteTicket 用于接收回调后更新sdk实例的suite ticket

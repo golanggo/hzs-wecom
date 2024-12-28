@@ -2,8 +2,8 @@ package logic
 
 import (
 	"encoding/xml"
-	"github.com/go-laoji/wecom-go-sdk/v2"
-	"github.com/go-laoji/wecom-go-sdk/v2/pkg/svr/models"
+	"github.com/golanggo/hzs-wecom"
+	"github.com/golanggo/hzs-wecom/pkg/svr/models"
 )
 
 type ResetPermanentCodeEvent struct {

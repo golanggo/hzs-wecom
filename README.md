@@ -17,7 +17,7 @@ http请求改用`go-resty`可方便指定重试、错误处理hooks(当前未处
 
 ## 使用
 
-    go get github.com/go-laoji/wecom-go-sdk/v2
+    go get github.com/golanggo/hzs-wecom/v2
 
 * 增加SetProxy(proxyUrl string) 对绕过IP限制有用,可参考[OpenResty(nginx)配置正向代理绕过企微自建IP限制](https://mp.weixin.qq.com/s/ZDUZyIaz3HOsrqRUQx8w-w)
 * 增加SetDebug(debug bool) 可以监控http请求,看如下的输出

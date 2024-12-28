@@ -2,8 +2,8 @@ package svr
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/go-laoji/wecom-go-sdk/v2/pkg/svr/callback"
-	"github.com/go-laoji/wecom-go-sdk/v2/pkg/svr/install"
+	"github.com/golanggo/hzs-wecom/pkg/svr/callback"
+	"github.com/golanggo/hzs-wecom/pkg/svr/install"
 )
 
 func InjectRouter(e *gin.Engine) {

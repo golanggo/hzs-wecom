@@ -1,6 +1,6 @@
 package wework
 
-import "github.com/go-laoji/wecom-go-sdk/v2/internal"
+import "github.com/golanggo/hzs-wecom/internal"
 
 type GetBillListRequest struct {
 	BeginTime   int64  `json:"begin_time" validate:"required"` // 单位/unit: s
