@@ -181,6 +181,7 @@ type IWeWork interface {
 	SchoolDepartmentList(corpId uint, departmentId int32) (resp SchoolDepartmentListResponse)
 
 	LivingCreate(corpId uint, request LivingCreateRequest) (resp LivingCreateResponse)
+	LivingCancel(corpId uint, livingId string) (resp internal.BizResponse)
 	GetUserAllLivingId(corpId uint, request GetUserAllLivingIdRequest) (resp GetUserAllLivingIdResponse)
 	GetLivingInfo(corpId uint, liveId string) (resp GetLivingInfoResponse)
 	GetWatchStat(corpId uint, request GetWatchStatRequest) (resp GetWatchStatResponse)

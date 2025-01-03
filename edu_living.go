@@ -197,3 +197,16 @@ func (ww *weWork) LivingCreate(corpId uint, request LivingCreateRequest) (resp L
 	}
 	return
 }
+
+// LivingCancel 取消预约直播
+// https://developer.work.weixin.qq.com/document/path/93718
+func (ww *weWork) LivingCancel(corpId uint, livingID string) (resp internal.BizResponse) {
+	p := H{"livingid": livingID}
+	_, err := ww.getRequest(corpId).SetBody(p).SetResult(&resp).
+		Post("/cgi-bin/living/cancel")
+	if err != nil {
+		resp.ErrCode = 500
+		resp.ErrorMsg = err.Error()
+	}
+	return
+}
