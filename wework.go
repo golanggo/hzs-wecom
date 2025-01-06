@@ -182,6 +182,7 @@ type IWeWork interface {
 
 	LivingCreate(corpId uint, request LivingCreateRequest) (resp LivingCreateResponse)
 	LivingCancel(corpId uint, livingId string) (resp internal.BizResponse)
+	LivingGetWatchStat(corpId uint, liveId, nextKey string) (resp LivingGetWatchStatResponse)
 	GetUserAllLivingId(corpId uint, request GetUserAllLivingIdRequest) (resp GetUserAllLivingIdResponse)
 	GetLivingInfo(corpId uint, liveId string) (resp GetLivingInfoResponse)
 	GetWatchStat(corpId uint, request GetWatchStatRequest) (resp GetWatchStatResponse)

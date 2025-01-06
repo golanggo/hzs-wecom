@@ -210,3 +210,38 @@ func (ww *weWork) LivingCancel(corpId uint, livingID string) (resp internal.BizR
 	}
 	return
 }
+
+type LivingGetWatchStatResponse struct {
+	internal.BizResponse
+	Ending   int    `json:"ending,omitempty"`   // 结束标志
+	NextKey  string `json:"next_key,omitempty"` // 下一页的键
+	StatInfo struct {
+		Users []struct {
+			UserID    string `json:"userid,omitempty"`     // 用户ID
+			WatchTime int    `json:"watch_time,omitempty"` // 观看时间
+			IsComment int    `json:"is_comment,omitempty"` // 是否评论
+			IsMic     int    `json:"is_mic,omitempty"`     // 是否开麦
+		} `json:"users,omitempty"` // 用户统计信息
+		ExternalUsers []struct {
+			ExternalUserID string `json:"external_userid,omitempty"` // 外部用户ID
+			Type           int    `json:"type,omitempty"`            // 用户类型
+			Name           string `json:"name,omitempty"`            // 用户名
+			WatchTime      int    `json:"watch_time,omitempty"`      // 观看时间
+			IsComment      int    `json:"is_comment,omitempty"`      // 是否评论
+			IsMic          int    `json:"is_mic,omitempty"`          // 是否开麦
+		} `json:"external_users,omitempty"` // 外部用户统计信息
+	} `json:"stat_info,omitempty"` // 统计信息
+}
+
+// LivingGetWatchStat 获取直播观看明细
+// https://developer.work.weixin.qq.com/document/path/96836
+func (ww *weWork) LivingGetWatchStat(corpId uint, liveId, nextKey string) (resp LivingGetWatchStatResponse) {
+	p := H{"livingid": liveId, "next_key": nextKey}
+	_, err := ww.getRequest(corpId).SetBody(p).SetResult(&resp).
+		Post("/cgi-bin/living/get_watch_stat")
+	if err != nil {
+		resp.ErrCode = 500
+		resp.ErrorMsg = err.Error()
+	}
+	return
+}
