@@ -245,3 +245,40 @@ func (ww *weWork) LivingGetWatchStat(corpId uint, liveId, nextKey string) (resp 
 	}
 	return
 }
+
+type LivingGetLivingInfoResponse struct {
+	internal.BizResponse
+	LivingInfo struct {
+		Theme                 string `json:"theme"`
+		LivingStart           int    `json:"living_start"`
+		LivingDuration        int    `json:"living_duration"`
+		Status                int    `json:"status"`
+		ReserveStart          int    `json:"reserve_start"`
+		ReserveLivingDuration int    `json:"reserve_living_duration"`
+		Description           string `json:"description"`
+		AnchorUserid          string `json:"anchor_userid"`
+		MainDepartment        int    `json:"main_department"`
+		ViewerNum             int    `json:"viewer_num"`
+		CommentNum            int    `json:"comment_num"`
+		MicNum                int    `json:"mic_num"`
+		OpenReplay            int    `json:"open_replay"`
+		ReplayStatus          int    `json:"replay_status"`
+		Type                  int    `json:"type"`
+		PushStreamUrl         string `json:"push_stream_url"`
+		OnlineCount           int    `json:"online_count"`
+		SubscribeCount        int    `json:"subscribe_count"`
+	} `json:"living_info"`
+}
+
+// LivingGetLivingInfo 获取直播详情
+// https://developer.work.weixin.qq.com/document/path/93635
+func (ww *weWork) LivingGetLivingInfo(corpId uint, liveId string) (resp LivingGetLivingInfoResponse) {
+	p := H{"livingid": liveId}
+	_, err := ww.getRequest(corpId).SetBody(p).SetResult(&resp).
+		Post("/cgi-bin/living/get_living_info")
+	if err != nil {
+		resp.ErrCode = 500
+		resp.ErrorMsg = err.Error()
+	}
+	return
+}
