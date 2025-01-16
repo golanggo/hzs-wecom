@@ -273,9 +273,8 @@ type LivingGetLivingInfoResponse struct {
 // LivingGetLivingInfo 获取直播详情
 // https://developer.work.weixin.qq.com/document/path/93635
 func (ww *weWork) LivingGetLivingInfo(corpId uint, liveId string) (resp LivingGetLivingInfoResponse) {
-	p := H{"livingid": liveId}
-	_, err := ww.getRequest(corpId).SetBody(p).SetResult(&resp).
-		Post("/cgi-bin/living/get_living_info")
+	_, err := ww.getRequest(corpId).SetResult(&resp).
+		SetQueryParam("livingid", liveId).Get("/cgi-bin/living/get_living_info")
 	if err != nil {
 		resp.ErrCode = 500
 		resp.ErrorMsg = err.Error()
