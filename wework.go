@@ -115,7 +115,7 @@ type IWeWork interface {
 
 	GetBillList(corpId uint, req GetBillListRequest) (resp GetBillListResponse)
 
-	MessageSend(corpId uint, msg interface{}) (resp MessageSendResponse)
+	MessageSend(corpId uint, req MessageSendRequest) (resp MessageSendResponse)
 	MessageReCall(corpId uint, msgId string) (resp internal.BizResponse)
 
 	MessageUpdateTemplateCard(corpId uint, msg TemplateCardUpdateMessage) (resp MessageUpdateTemplateCardResponse)

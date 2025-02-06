@@ -1,7 +1,6 @@
 package wework
 
 import (
-	"encoding/json"
 	"github.com/golanggo/hzs-wecom/internal"
 )
 
@@ -125,43 +124,23 @@ type MessageSendResponse struct {
 	//应用可使用response_code调用更新模版卡片消息接口，24小时内有效，且只能使用一次
 }
 
+type MessageSendRequest struct {
+	ToUser  string `json:"touser"`
+	AgentID int    `json:"agentid"`
+	MsgType string `json:"msgtype"`
+	Text    struct {
+		Content string `json:"content"`
+	} `json:"text"`
+}
+
 // MessageSend 发送应用消息
 // https://open.work.weixin.qq.com/api/doc/90001/90143/90372
-func (ww *weWork) MessageSend(corpId uint, msg interface{}) (resp MessageSendResponse) {
-	if ok := validate.Struct(msg); ok != nil {
-		resp.ErrCode = 500
-		resp.ErrorMsg = ok.Error()
-		return
-	}
+func (ww *weWork) MessageSend(corpId uint, request MessageSendRequest) (resp MessageSendResponse) {
 	h := H{}
-	buf, _ := json.Marshal(msg)
-	json.Unmarshal(buf, &h)
-	h["agentid"] = ww.GetAgentId(corpId)
-	switch msg.(type) {
-	case TextMessage:
-		h["msgtype"] = "text"
-	case ImageMessage:
-		h["msgtype"] = "image"
-	case VoiceMessage:
-		h["msgtype"] = "voice"
-	case VideoMessage:
-		h["msgtype"] = "video"
-	case FileMessage:
-		h["msgtype"] = "file"
-	case TextCardMessage:
-		h["msgtype"] = "textcard"
-	case NewsMessage:
-		h["msgtype"] = "news"
-	case MpNewsMessage:
-		h["msgtype"] = "mpnews"
-	case MarkDownMessage:
-		h["msgtype"] = "markdown"
-	case MiniProgramMessage:
-		h["msgtype"] = "miniprogram_notice"
-	case TemplateCardMessage:
-		h["msgtype"] = "template_card"
-	}
-
+	h["touser"] = request.ToUser
+	h["agentid"] = request.AgentID
+	h["msgtype"] = request.MsgType
+	h["text"] = request.Text
 	_, err := ww.getRequest(corpId).SetBody(h).SetResult(&resp).
 		Post("/cgi-bin/message/send")
 	if err != nil {
