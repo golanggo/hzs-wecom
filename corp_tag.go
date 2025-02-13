@@ -13,6 +13,14 @@ type CorpTagGroup struct {
 	Tag        []CorpTag `json:"tag"`
 }
 
+type CorpTagGroupNotGroupId struct {
+	GroupName  string    `json:"group_name"`
+	CreateTime uint64    `json:"create_time,omitempty"`
+	Order      int       `json:"order,omitempty"`
+	Deleted    bool      `json:"deleted,omitempty"`
+	Tag        []CorpTag `json:"tag"`
+}
+
 type CorpTag struct {
 	Id         string `json:"id,omitempty"`
 	Name       string `json:"name" validate:"required,max=30"`
@@ -49,12 +57,29 @@ type CorpTagAddResponse struct {
 // CorpTagAdd 企业可通过此接口向客户标签库中添加新的标签组和标签，每个企业最多可配置3000个企业标签。
 // https://open.work.weixin.qq.com/api/doc/90001/90143/92696#%E6%B7%BB%E5%8A%A0%E4%BC%81%E4%B8%9A%E5%AE%A2%E6%88%B7%E6%A0%87%E7%AD%BE
 func (ww *weWork) CorpTagAdd(corpId uint, tagGroup CorpTagGroup) (resp CorpTagAddResponse) {
-	_, err := ww.getRequest(corpId).
-		SetBody(tagGroup).SetResult(&resp).
-		Post("/cgi-bin/externalcontact/add_corp_tag")
-	if err != nil {
-		resp.ErrCode = 500
-		resp.ErrorMsg = err.Error()
+	if tagGroup.GroupId == "" {
+		//剔除这个字段
+		var tagGroupNotGroupId CorpTagGroupNotGroupId
+		tagGroupNotGroupId.GroupName = tagGroup.GroupName
+		tagGroupNotGroupId.CreateTime = tagGroup.CreateTime
+		tagGroupNotGroupId.Order = tagGroup.Order
+		tagGroupNotGroupId.Deleted = tagGroup.Deleted
+		tagGroupNotGroupId.Tag = tagGroup.Tag
+		_, err := ww.getRequest(corpId).
+			SetBody(tagGroupNotGroupId).SetResult(&resp).
+			Post("/cgi-bin/externalcontact/add_corp_tag")
+		if err != nil {
+			resp.ErrCode = 500
+			resp.ErrorMsg = err.Error()
+		}
+	} else {
+		_, err := ww.getRequest(corpId).
+			SetBody(tagGroup).SetResult(&resp).
+			Post("/cgi-bin/externalcontact/add_corp_tag")
+		if err != nil {
+			resp.ErrCode = 500
+			resp.ErrorMsg = err.Error()
+		}
 	}
 	return
 }
