@@ -198,6 +198,26 @@ func (ww *weWork) LivingCreate(corpId uint, request LivingCreateRequest) (resp L
 	return
 }
 
+type GetLivingCodeCreateResponse struct {
+	internal.BizResponse
+	LivingCode string `json:"living_code"`
+}
+
+// GetLivingCode 获取微信观看直播凭证
+// https://developer.work.weixin.qq.com/document/path/93641
+func (ww *weWork) GetLivingCode(corpId uint, live_id, openid string) (resp GetLivingCodeCreateResponse) {
+	h := H{}
+	h["livingid"] = live_id
+	h["openid"] = openid
+	_, err := ww.getRequest(corpId).SetBody(h).SetResult(&resp).
+		Post("/cgi-bin/living/get_living_code")
+	if err != nil {
+		resp.ErrCode = 500
+		resp.ErrorMsg = err.Error()
+	}
+	return
+}
+
 // LivingCancel 取消预约直播
 // https://developer.work.weixin.qq.com/document/path/93718
 func (ww *weWork) LivingCancel(corpId uint, livingID string) (resp internal.BizResponse) {
