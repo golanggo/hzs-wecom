@@ -4,6 +4,23 @@ import (
 	"github.com/golanggo/hzs-wecom/internal"
 )
 
+type IdConvertUnionIdToExternalUserIdResponse struct {
+	internal.BizResponse
+	ExternalUserId string `json:"external_userid"`
+	PendingId      string `json:"pending_id"`
+}
+
+func (ww *weWork) IdConvertUnionIdToExternalUserId(corpId uint, unionid, openid string, subjectType int) (resp IdConvertUnionIdToExternalUserIdResponse) {
+	p := H{"unionid": unionid, "openid": openid, "subject_type": subjectType}
+	_, err := ww.getRequest(corpId).SetBody(p).SetResult(&resp).
+		Post("/cgi-bin/idconvert/unionid_to_external_userid")
+	if err != nil {
+		resp.ErrCode = 500
+		resp.ErrorMsg = err.Error()
+	}
+	return
+}
+
 type IdConvertExternalTagIdResponse struct {
 	internal.BizResponse
 	Items []struct {

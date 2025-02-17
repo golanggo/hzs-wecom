@@ -254,6 +254,7 @@ type IWeWork interface {
 	// ExecuteCorpApi 用于执行未实现的接口，返回 []byte,error
 	ExecuteCorpApi(corpId uint, apiUrl string, query url.Values, data H) (body []byte, err error)
 
+	IdConvertUnionIdToExternalUserId(corpId uint, unionid, openid string, subjectType int) (resp IdConvertUnionIdToExternalUserIdResponse)
 	IdConvertExternalTagId(corpId uint, tagIdList []string) (resp IdConvertExternalTagIdResponse)
 	CorpIdToOpenCorpId(corpId string) (resp CorpIdToOpenCorpIdResponse)
 	UserIdToOpenUserId(corpId uint, userIdList []string) (resp UserIdToOpenUserIdResponse)
