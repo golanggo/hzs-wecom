@@ -5,9 +5,15 @@ import (
 )
 
 type WelcomeMessage struct {
-	WelcomeCode string                `json:"welcome_code"`
-	Text        ExternalText          `json:"text,omitempty"`
-	Attachments []ExternalAttachments `json:"attachments,omitempty"`
+	WelcomeCode string              `json:"welcome_code"`
+	Text        ExternalText        `json:"text,omitempty"`
+	Image       ExternalImage       `json:"image,omitempty"`
+	Link        ExternalLink        `json:"link,omitempty"`
+	Miniprogram ExternalMiniprogram `json:"miniprogram,omitempty"`
+	Video       ExternalVideo       `json:"video,omitempty"`
+	File        ExternalFile        `json:"file,omitempty"`
+	Agentid     int                 `json:"agentid"`
+	Notify      int                 `json:"notify"`
 }
 
 // SendWelcomeMsg 发送新客户欢迎语
