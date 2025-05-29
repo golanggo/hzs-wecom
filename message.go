@@ -150,6 +150,32 @@ func (ww *weWork) MessageSend(corpId uint, request MessageSendRequest) (resp Mes
 	return
 }
 
+type FileMessageSendRequest struct {
+	ToUser  string `json:"touser"`
+	AgentID int    `json:"agentid"`
+	MsgType string `json:"msgtype"`
+	File    struct {
+		MediaId string `json:"media_id"`
+	} `json:"file"`
+}
+
+// MessageSend 发送应用消息
+// https://open.work.weixin.qq.com/api/doc/90001/90143/90372
+func (ww *weWork) FileMessageSend(corpId uint, request FileMessageSendRequest) (resp MessageSendResponse) {
+	h := H{}
+	h["touser"] = request.ToUser
+	h["agentid"] = request.AgentID
+	h["msgtype"] = request.MsgType
+	h["file"] = request.File
+	_, err := ww.getRequest(corpId).SetBody(h).SetResult(&resp).
+		Post("/cgi-bin/message/send")
+	if err != nil {
+		resp.ErrCode = 500
+		resp.ErrorMsg = err.Error()
+	}
+	return
+}
+
 // MessageReCall 撤回应用消息
 // https://open.work.weixin.qq.com/api/doc/90000/90135/94867
 func (ww *weWork) MessageReCall(corpId uint, msgId string) (resp internal.BizResponse) {
