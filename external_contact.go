@@ -16,7 +16,7 @@ type ExternalContactCustomerAcquisitionCreateLinkRequest struct {
 }
 type Range struct {
 	UserList       []string `json:"user_list"`
-	DepartmentList []string `json:"department_list"`
+	DepartmentList []uint32 `json:"department_list"`
 }
 type ExternalContactCustomerAcquisitionCreateLinkResponse struct {
 	internal.BizResponse
