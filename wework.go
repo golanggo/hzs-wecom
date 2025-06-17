@@ -67,6 +67,7 @@ type IWeWork interface {
 	DepartmentSimpleList(corpId uint, id int32) (resp DepartmentSimpleListResponse)
 	DepartmentGet(corpId uint, id int32) (resp DepartmentGetResponse)
 
+	ExternalContactCustomerAcquisitionCreateLink(corpId uint, request ExternalContactCustomerAcquisitionCreateLinkRequest) (resp ExternalContactCustomerAcquisitionCreateLinkResponse)
 	ExternalContactGetFollowUserList(corpId uint) (resp ExternalContactGetFollowUserListResponse)
 	ExternalContactList(corpId uint, userId string) (resp ExternalContactListResponse)
 	ExternalContactGet(corpId uint, externalUserId, cursor string) (resp ExternalContactGetResponse)

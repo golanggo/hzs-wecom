@@ -9,6 +9,37 @@ type ExternalContactGetFollowUserListResponse struct {
 	FollowUser []string `json:"follow_user"`
 }
 
+type ExternalContactCustomerAcquisitionCreateLinkRequest struct {
+	LinkName   string `json:"link_name"`
+	Range      Range  `json:"range"`
+	SkipVerify bool   `json:"skip_verify"`
+}
+type Range struct {
+	UserList       []string `json:"user_list"`
+	DepartmentList []string `json:"department_list"`
+}
+type ExternalContactCustomerAcquisitionCreateLinkResponse struct {
+	internal.BizResponse
+	Link struct {
+		LinkId     string `json:"link_id"`
+		LinkName   string `json:"link_name"`
+		Url        string `json:"url"`
+		CreateTime int64  `json:"create_time"`
+	}
+}
+
+// ExternalContactCustomerAcquisition 创建获客链接
+// 参考连接　https://developer.work.weixin.qq.com/document/path/97297
+func (ww *weWork) ExternalContactCustomerAcquisitionCreateLink(corpId uint, request ExternalContactCustomerAcquisitionCreateLinkRequest) (resp ExternalContactCustomerAcquisitionCreateLinkResponse) {
+	_, err := ww.getRequest(corpId).SetBody(request).SetResult(&resp).
+		Post("/cgi-bin/externalcontact/customer_acquisition/create_link")
+	if err != nil {
+		resp.ErrCode = 500
+		resp.ErrorMsg = err.Error()
+	}
+	return
+}
+
 // ExternalContactGetFollowUserList 获取配置了客户联系功能的成员列表
 // 参考连接　https://open.work.weixin.qq.com/api/doc/90001/90143/92576
 func (ww *weWork) ExternalContactGetFollowUserList(corpId uint) (resp ExternalContactGetFollowUserListResponse) {
